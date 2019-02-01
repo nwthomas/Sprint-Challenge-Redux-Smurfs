@@ -10,9 +10,7 @@ import rootReducer from "./reducers";
 
 const middlewareQueue = applyMiddleware(thunk, logger);
 
-const store = createStore(() => {
-  rootReducer;
-}, middlewareQueue);
+const store = createStore(rootReducer, middlewareQueue);
 
 ReactDOM.render(
   <Provider store={store}>
