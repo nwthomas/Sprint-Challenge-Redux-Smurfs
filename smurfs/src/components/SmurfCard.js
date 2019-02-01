@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { deleteSmurf } from "../actions/index";
+import { deleteSmurf, startUpdateSmurf } from "../actions/index";
 
 const SmurfCard = props => {
   console.log(props.smurf);
@@ -8,12 +8,19 @@ const SmurfCard = props => {
     e.preventDefault();
     props.deleteSmurf(props.smurf.id);
   };
+  const startUpdateSmurf = e => {
+    e.preventDefault();
+    props.startUpdateSmurf(props.smurf.id);
+  };
   return (
     <div className="smurf__card">
       <h2 className="smurf__name">{props.smurf.name}</h2>
       <p className="smurf_age">{props.smurf.age}</p>
       <p className="smurf_height">{props.smurf.height}</p>
       <div className="buttons__container">
+        <button className="btn" type="button" onClick={startUpdateSmurf}>
+          Update
+        </button>
         <button className="btn" type="button" onClick={deleteSmurf}>
           Delete
         </button>
@@ -23,7 +30,8 @@ const SmurfCard = props => {
 };
 
 const mapActionsToProps = {
-  deleteSmurf
+  deleteSmurf,
+  startUpdateSmurf
 };
 
 export default connect(

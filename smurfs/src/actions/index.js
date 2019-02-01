@@ -12,6 +12,8 @@ export const DELETE_SMURF_ERROR = "DELETE_SMURF_ERROR";
 export const UPDATE_SMURF_START = "UPDATE_SMURF_START";
 export const UPDATE_SMURF_SUCCESS = "UPDATE_SMURF_SUCCESS";
 export const UPDATE_SMURF_ERROR = "UPDATE_SMURF_ERROR";
+export const HANDLE_INPUT_CHANGE = "HANDLE_INPUT_CHANGE";
+export const START_UPDATE_SMURF = "START_UPDATE_SMURF";
 
 export const getSmurfs = _ => dispatch => {
   dispatch({ type: GET_SMURFS_START });
@@ -53,11 +55,25 @@ export const deleteSmurf = id => dispatch => {
 export const updateSmurf = smurf => dispatch => {
   dispatch({ type: UPDATE_SMURF_START });
   axios
-    .put(`http://localhost:3333/smurfs/${smurf.id}`)
+    .put(`http://localhost:3333/smurfs/${smurf.id}`, smurf)
     .then(res => {
-      dispatch({ type: UPDATE_SMURF_START, payload: res.data });
+      dispatch({ type: UPDATE_SMURF_SUCCESS, payload: res.data });
     })
     .catch(err => {
       dispatch({ type: UPDATE_SMURF_ERROR, payload: err.data });
     });
+};
+
+export const handleChange = e => {
+  return {
+    type: HANDLE_INPUT_CHANGE,
+    payload: e
+  };
+};
+
+export const startUpdateSmurf = id => {
+  return {
+    type: START_UPDATE_SMURF,
+    payload: id
+  };
 };

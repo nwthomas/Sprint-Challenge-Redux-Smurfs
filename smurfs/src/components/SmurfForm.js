@@ -1,27 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { postSmurf } from "../actions/index";
+import { postSmurf, handleChange, updateSmurf } from "../actions/index";
 
 class SmurfForm extends Component {
-  state = {
-    inputName: "",
-    inputAge: "",
-    inputHeight: ""
-  };
-
   handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    this.props.handleChange(e);
   };
 
   postSmurf = e => {
     e.preventDefault();
-    this.props.postSmurf({
-      name: this.state.inputName,
-      age: this.state.inputAge,
-      height: this.state.inputHeight
-    });
+    if (this.props.updatingID !== null) {
+      this.props.updateSmurf({
+        name: this.props.inputName,
+        age: this.props.inputAge,
+        height: this.props.inputHeight,
+        id: this.props.updatingID
+      });
+    } else {
+      this.props.postSmurf({
+        name: this.props.inputName,
+        age: this.props.inputAge,
+        height: this.props.inputHeight
+      });
+    }
   };
 
   render() {
@@ -31,7 +32,7 @@ class SmurfForm extends Component {
           required
           type="text"
           name="inputName"
-          value={this.state.inputName}
+          value={this.props.inputName}
           onChange={this.handleChange}
           placeholder="Name"
         />
@@ -39,7 +40,7 @@ class SmurfForm extends Component {
           required
           type="text"
           name="inputAge"
-          value={this.state.inputAge}
+          value={this.props.inputAge}
           onChange={this.handleChange}
           placeholder="Age"
         />
@@ -47,11 +48,13 @@ class SmurfForm extends Component {
           required
           type="text"
           name="inputHeight"
-          value={this.state.inputHeight}
+          value={this.props.inputHeight}
           onChange={this.handleChange}
           placeholder="Height"
         />
-        <button type="submit">Submit</button>
+        <button type="submit">
+          {this.props.formUpdating ? "Update" : "Submit"}
+        </button>
       </form>
     );
   }
@@ -59,15 +62,22 @@ class SmurfForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    smurfs: state.smurfs
+    smurfs: state.smurfs,
+    formUpdating: state.formUpdating,
+    inputName: state.inputName,
+    inputAge: state.inputAge,
+    inputHeight: state.inputHeight,
+    updatingID: state.updatingID
   };
 };
 
 const mapActionsToProps = {
-  postSmurf
+  postSmurf,
+  handleChange,
+  updateSmurf
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapActionsToProps
 )(SmurfForm);
