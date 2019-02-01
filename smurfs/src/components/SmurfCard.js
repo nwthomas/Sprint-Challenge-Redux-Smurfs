@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { deleteSmurf } from "../actions/index";
 
 const SmurfCard = props => {
   return (
@@ -6,8 +8,24 @@ const SmurfCard = props => {
       <h2 className="smurf__name">{props.smurf.name}</h2>
       <p className="smurf_age">{props.smurf.age}</p>
       <p className="smurf_height">{props.smurf.height}</p>
+      <div className="buttons__container">
+        <button
+          className="btn"
+          type="button"
+          onClick={() => props.deleteSmurf(props.smurf)}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
 
-export default SmurfCard;
+const mapActionsToProps = {
+  deleteSmurf
+};
+
+export default connect(
+  null,
+  mapActionsToProps
+)(SmurfCard);
