@@ -20,8 +20,7 @@ class SmurfForm extends Component {
     this.props.postSmurf({
       name: this.state.inputName,
       age: this.state.inputAge,
-      height: this.state.inputHeight,
-      id: this.props.smurfs.length + 1
+      height: this.state.inputHeight
     });
   };
 

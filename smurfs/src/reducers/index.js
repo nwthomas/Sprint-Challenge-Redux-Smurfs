@@ -38,6 +38,25 @@ const smurfReducer = (state = initialStore, action) => {
         error: action.payload,
         fetchingSmurfs: false
       };
+    case POST_SMURF_START:
+      return {
+        ...state,
+        addingSmurf: true,
+        error: null
+      };
+    case POST_SMURF_SUCCESS:
+      return {
+        ...state,
+        smurfs: action.payload,
+        addingSmurf: false,
+        error: null
+      };
+    case POST_SMURF_ERROR:
+      return {
+        ...state,
+        addingSmurf: false,
+        error: action.payload
+      };
     default:
       return state;
   }
