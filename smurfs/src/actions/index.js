@@ -38,9 +38,10 @@ export const postSmurf = smurf => dispatch => {
 };
 
 export const deleteSmurf = id => dispatch => {
+  console.log(id);
   dispatch({ type: DELETE_SMURF_START });
   axios
-    .post(`http://localhost:3333/smurfs/${id}`)
+    .delete(`http://localhost:3333/smurfs/${id}`)
     .then(res => {
       dispatch({ type: DELETE_SMURF_SUCCESS, payload: res.data });
     })
@@ -52,7 +53,7 @@ export const deleteSmurf = id => dispatch => {
 export const updateSmurf = smurf => dispatch => {
   dispatch({ type: UPDATE_SMURF_START });
   axios
-    .post(`http://localhost:3333/smurfs/${smurf.id}`)
+    .put(`http://localhost:3333/smurfs/${smurf.id}`)
     .then(res => {
       dispatch({ type: UPDATE_SMURF_START, payload: res.data });
     })
