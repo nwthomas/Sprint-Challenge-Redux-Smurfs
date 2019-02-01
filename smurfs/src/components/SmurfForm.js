@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { postSmurf, handleChange, updateSmurf } from "../actions/index";
+import {
+  postSmurf,
+  handleChange,
+  updateSmurf,
+  clearForm
+} from "../actions/index";
 
 class SmurfForm extends Component {
   handleChange = e => {
@@ -23,6 +28,11 @@ class SmurfForm extends Component {
         height: this.props.inputHeight
       });
     }
+  };
+
+  clearForm = e => {
+    e.preventDefault();
+    this.props.clearForm();
   };
 
   render() {
@@ -55,6 +65,9 @@ class SmurfForm extends Component {
         <button type="submit">
           {this.props.formUpdating ? "Update" : "Submit"}
         </button>
+        <button type="button" onClick={this.clearForm}>
+          Clear
+        </button>
       </form>
     );
   }
@@ -74,7 +87,8 @@ const mapStateToProps = state => {
 const mapActionsToProps = {
   postSmurf,
   handleChange,
-  updateSmurf
+  updateSmurf,
+  clearForm
 };
 
 export default connect(

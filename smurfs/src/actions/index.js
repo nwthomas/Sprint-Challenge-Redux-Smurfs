@@ -14,6 +14,7 @@ export const UPDATE_SMURF_SUCCESS = "UPDATE_SMURF_SUCCESS";
 export const UPDATE_SMURF_ERROR = "UPDATE_SMURF_ERROR";
 export const HANDLE_INPUT_CHANGE = "HANDLE_INPUT_CHANGE";
 export const START_UPDATE_SMURF = "START_UPDATE_SMURF";
+export const CLEAR_FORM = "CLEAR_FORM";
 
 export const getSmurfs = _ => dispatch => {
   dispatch({ type: GET_SMURFS_START });
@@ -75,5 +76,11 @@ export const startUpdateSmurf = id => {
   return {
     type: START_UPDATE_SMURF,
     payload: id
+  };
+};
+
+export const clearForm = _ => {
+  return {
+    type: CLEAR_FORM
   };
 };

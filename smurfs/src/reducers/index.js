@@ -12,7 +12,8 @@ import {
   START_UPDATE_SMURF,
   UPDATE_SMURF_START,
   UPDATE_SMURF_SUCCESS,
-  UPDATE_SMURF_ERROR
+  UPDATE_SMURF_ERROR,
+  CLEAR_FORM
 } from "../actions";
 
 const initialStore = {
@@ -137,6 +138,15 @@ const smurfReducer = (state = initialStore, action) => {
         ...state,
         error: action.payload,
         updatingSmurf: false
+      };
+    case CLEAR_FORM:
+      return {
+        ...state,
+        updatingSmurf: false,
+        inputName: "",
+        inputAge: "",
+        inputHeight: "",
+        formUpdating: false
       };
     default:
       return state;

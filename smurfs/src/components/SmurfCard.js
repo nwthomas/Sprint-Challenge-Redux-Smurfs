@@ -14,9 +14,9 @@ const SmurfCard = props => {
   };
   return (
     <div className="smurf__card">
-      <h2 className="smurf__name">{props.smurf.name}</h2>
-      <p className="smurf_age">{props.smurf.age}</p>
-      <p className="smurf_height">{props.smurf.height}</p>
+      <h2 className="smurf__name">Name: {props.smurf.name}</h2>
+      <p className="smurf_age">Age: {props.smurf.age}</p>
+      <p className="smurf_height">Height: {props.smurf.height}</p>
       <div className="buttons__container">
         <button className="btn" type="button" onClick={startUpdateSmurf}>
           Update
